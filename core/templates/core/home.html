@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="tabs is-small is-centered">
+  <ul>
+    <li class="is-active"> <a>For you</a></li>
+    <li><a href="{% url 'core:most_popular' %}">Most popular</a></li>
+    <li><a href="{% url 'core:most_liked' %}">Most liked</a></li>
+    <li><a href="{% url 'core:admin_posts' %}">Admin posts</a></li>
+  </ul>
+</div>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider" >
+
+{% for discussion in discussions %}
+{% include 'discussion/discussion_div.html' %}
+{% empty %}
+<br>
+<br>
+<center>
+   <img src="{% static 'images/empty-folder.png' %}" style="height: 100px; width: 100px;">
+   <br><a href="{% url 'discussion:interest' %}">Follow categories</a> to see discussions from them.
+</center>
+{% endfor %}
+
+</div>
+</div>
+
+{% else %}
+
+<section class="hero is-medium is-info" style="border-radius: 20px;">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column">
+                <center>
+                    <figure>
+                        <img src="{% static 'images/discussion_icon.png' %}" style="object-fit: cover; max-height:200px">
+                    </figure>
+                </center>
+            </div>
+            <div class="column is-half">
+                <p class="title is-size-1 is-size-3-mobile">
+                    <b>Exchange great ideas!</b>
+                </p>
+                <p class="subtitle is-size-5-mobile" style="margin-top: 1px;">
+                    <b>
+
+DiscussPoint is a new varient of boring Q&A websites.<br>Here you can ask questions, exchange ideas and solve problems by discussing them with a huge online community. <br> It is your place start discussion any topic you want and get response from all around the world. <br> Users already started a lot of discussions on many categories and tags. Go and explore them submit your ideas in their discussions.
+</b>
+                    <br><br><a href="{% url 'users:login' %}" class="button"><b>Log in</b></a>
+                    <a href="{% url 'users:signup' %}" class="button is-outlined is-light"><b>Sign up</b></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+
+
+{% endblock content %}

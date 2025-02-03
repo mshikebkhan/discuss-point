@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="columns is-centered has-text-centered">
+<div class="column is-wider is-narrow-tablet is-half-desktop">
+      <div class="card" style="border: 2px solid #3298DC;">
+         <div class="card-content">
+
+            <figure style="margin-bottom: 10px;">
+            <img src="{% static 'images/logo.jpg'%}" width="50%">
+            </figure>
+
+            <form method="post" >
+               {% csrf_token %}
+
+               <div class="field">
+                  <p class="control has-icons-left has-icons-right">
+                     <input class="input" name="username" type="text" placeholder="Enter your username" required id="id_username">
+                     <span class="icon is-small is-left">
+                     <i style="color: black;" class="material-icons">account_circle</i>
+                     </span>
+                  </p>
+               </div>
+
+
+               <div class="field">
+                  <p class="control has-icons-left has-icons-right">
+                     <input class="input" name="password" type="password" placeholder="Enter your password" required id="id_password">
+                     <span class="icon is-small is-left">
+                     <i style="color: black;" class="material-icons">lock</i>
+                     </span>
+                  </p>
+               </div>
+
+               {% if form.errors %}
+               <div class="row">
+                  <div class="col s12">
+                     <span style="color: red; font-weight: bold;">Your username or password did not match.</span>
+                  </div>
+               </div>
+               {% endif %}
+
+
+               <div class="field">
+                  <p class="control">
+                     <button type="submit" value="login" class="button is-info is-fullwidth">
+                     Log in
+                     </button>
+                  </p>
+               </div>
+
+               {% if request.GET.next %}
+
+               <input type="hidden" name="next" value="{{request.GET.next}}"/>
+
+              {% else %}
+
+               <input type="hidden" name="next" value="{% url 'core:home' %}"/>
+
+               {% endif %}
+
+            </form>
+
+         </div>
+      </div>
+
+      <br/>
+      <p class="subtitle is-6 ">Don't have an account? <a href="{% url 'users:signup' %}" >Signup</a> for free!</p>
+
+   </div>
+</div>
+
+
+
+
+{% endblock  %}

@@ -1,0 +1,95 @@
+<div class="card" style="margin-top: 30px;" id="id_discussion_{{discussion.id}}">
+  <header class="card-header">
+    <p class="card-header-title">
+      {% if discussion.user == request.user %}
+      <a style="color: inherit" href="{% url 'users:profile' %}">
+      {% else %}
+      <a style="color: inherit" href="{% url 'users:user_profile' discussion.user %}">
+      {% endif %}
+      {{discussion.user.first_name}} {{discussion.user.last_name}}
+      </a>
+    </p>
+    <span style="cursor: default;" class="card-header-icon is-small is-light ">{{discussion.date_created|timesince}} ago</span>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      <p class="subtitle is-size-4 is-size-5-mobile">
+      <a href="{% url 'discussion:discussion_detail' discussion.id %}">{{discussion.title}}</a>
+      </p>
+      <div class="field is-grouped is-grouped-multiline">
+        <div class="control">
+          <div class="tags has-addons">
+            <span class="tag is-dark">Views</span>
+            <span class="tag is-info">{{discussion.views}}</span>
+          </div>
+        </div>
+
+        <div class="control">
+          <div class="tags has-addons">
+            <span class="tag is-dark">Likes</span>
+            <span id="id_discussion_likes_count_{{discussion.id}}" class="tag is-info">{{discussion.likes}}</span>
+          </div>
+        </div>
+
+        <div class="control">
+          <div class="tags has-addons">
+            <span class="tag is-dark">Threads</span>
+            <span class="tag is-info">{{discussion.threads_count}}</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+{% if discussion.user == request.user %}
+    <footer class="card-footer">
+      <a class="card-footer-item">
+        <button  onclick="deleteDiscussion(this)" name="{{discussion.id}}" class="button is-small is-light">Delete</button>
+      </a>
+      <a  class="card-footer-item">
+        {% if discussion.closed %}
+        <button onclick="closeDiscussion(this)" id="id_discussion_close_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-danger">Closed</button>
+        {% else %}
+        <button onclick="closeDiscussion(this)" id="id_discussion_close_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Close</button>
+        {% endif %}
+      </a>
+      <a  class="card-footer-item">
+        {% if discussion in saved_discussions %}
+        <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-success">Saved</button>
+        {% else %}
+        <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Save</button>
+        {% endif %}
+      </a>
+    </footer>
+{% else %}
+<footer class="card-footer">
+    {% if discussion.reported %}
+  <a class="card-footer-item is-idle">
+    <button id="id_discussion_report_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-danger is-idle">Reported</button>
+  </a>
+  {% else %}
+  <a id="id_discussion_report_a_{{discussion.id}}" class="card-footer-item">
+    <button onclick="reportDiscussion(this)" id="id_discussion_report_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Report</button>
+  </a>
+  {% endif %}
+
+  <a  class="card-footer-item">
+    {% if discussion in liked_discussions %}
+    <button onclick="likeDiscussion(this)" id="id_discussion_like_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-info">Liked</button>
+    {% else %}
+    <button onclick="likeDiscussion(this)" id="id_discussion_like_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Like</button>
+    {% endif %}
+  </a>
+
+  <a  class="card-footer-item">
+    {% if discussion in saved_discussions %}
+    <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-success">Saved</button>
+    {% else %}
+    <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Save</button>
+    {% endif %}
+  </a>
+</footer>
+{% endif %}
+</div>

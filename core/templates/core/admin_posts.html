@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="tabs is-small is-centered">
+  <ul>
+    <li><a href="{% url 'core:home' %}">For you</a></li>
+    <li><a href="{% url 'core:most_popular' %}">Most popular</a></li>
+    <li><a href="{% url 'core:most_liked' %}">Most liked</a></li>
+    <li class="is-active"><a>Admin posts</a></li>
+  </ul>
+</div>
+
+<p Class="title is-size-5">Official updates from DiscussPoint.</p>
+<hr>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider" >
+
+{% for post in posts %}
+
+<b>Mohd Shikeb Khan</b>
+<span><img src="{% static 'images/verified.png' %}" alt=":)" height="15px" width="15px"></span>
+<span class="is-pulled-right">{{post.date_created|date}}</span>
+<article class="message is-ghost">
+  <div class="message-body">
+    {{post.content}}
+  </div>
+</article>
+
+{% empty %}
+<br>
+<br>
+<center>
+   <img src="{% static 'images/empty-folder.png' %}" style="height: 100px; width: 100px;">
+   <br>No latest update.
+</center>
+{% endfor %}
+
+</div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="tabs is-small is-centered">
+  <ul>
+    <li><a href="{% url 'core:home' %}">For you</a></li>
+    <li class="is-active"><a>Most popular</a></li>
+    <li><a href="{% url 'core:most_liked' %}">Most liked</a></li>
+    <li><a href="{% url 'core:admin_posts' %}">Admin posts</a></li>     
+  </ul>
+</div>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider" >
+
+{% for discussion in discussions %}
+{% include 'discussion/discussion_div.html' %}
+{% empty %}
+<br>
+<br>
+<center>
+   <img src="{% static 'images/empty-folder.png' %}" style="height: 100px; width: 100px;">
+   <br><a href="{% url 'discussion:interest' %}">Follow categories</a> to see discussions from them.
+</center>
+{% endfor %}
+
+</div>
+</div>
+
+
+{% endblock content %}

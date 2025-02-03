@@ -1,0 +1,321 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<p Class="title is-size-5">Edit profile</p>
+<hr>
+
+{% if messages %}
+    {% for message in messages %}
+<article class="message is-{{message.tags}}">
+  <div class="message-body">
+    {{message}}
+  </div>
+</article>
+ {% endfor %}
+ {% endif %}
+
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
+
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Name</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded ">
+        <input class="input " name="first_name" required id="id_first_name" value="{{uform.first_name.value}}"  type="text" placeholder="Enter your first name">
+      </p>
+      <p class="help is-danger">
+        {% if uform.first_name.errors %}
+    <ul>
+    {% for error in uform.first_name.errors %}
+        <li><strong style="color: red;">{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+    <div class="field">
+      <p class="control is-expanded ">
+        <input class="input " type="text" name="last_name" required id="id_last_name" placeholder="Enter your last name" value="{{uform.last_name.value}}" >
+      </p>
+      <p class="help is-danger">
+      {% if uform.last_name.errors %}
+    <ul>
+    {% for error in uform.last_name.errors %}
+        <li><strong style="color: red;">{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Username</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded has-icons-left">
+        <input class="input " type="text" name="username" required id="id_username" value="{{uform.username.value}}" placeholder="Enter your username">
+        <span class="icon is-small is-left">
+          <i  class="material-icons">account_circle</i>
+        </span>
+      </p>
+      <p>
+      {% if uform.username.errors %}
+    <ul>
+    {% for error in uform.username.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Email</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded has-icons-left">
+        <input class="input " name="email" required id="id_email" type="email" value="{{uform.email.value}}" placeholder="Enter your email">
+        <span class="icon is-small is-left">
+          <i  class="material-icons">email</i>
+        </span>
+      </p>
+        <p class="help">
+        Please enter a valid email as it is very important. In case you forgot password or you want alerts via email.
+      </p>
+      <p class="help is-danger">
+      {% if uform.email.errors %}
+    <ul>
+    {% for error in uform.email.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Gender</label>
+  </div>
+  <div class="field-body">
+    <div class="field is-narrow">
+      <div class="control">
+        <div class="select is-fullwidth ">
+          <select name=gender  required id="id_gender">
+
+            {% if pform.gender.value == "Female" %}
+            <option selected>Female</option>
+            <option>Male</option>
+            {% else %}
+            <option selected>Male</option>
+            <option>Female</option>
+            {% endif %}
+
+          </select>
+        </div>
+      </div>
+      <p class="help is-danger">
+      {% if pform.gender.errors %}
+    <ul>
+    {% for error in pform.gender.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Age</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input" type="number" min="12" max="150" name="age" value="{{pform.age.value|default_if_none:''}}" placeholder="How old your are? (optional)">
+      </p>
+      <p>
+      {% if pform.age.errors %}
+    <ul>
+    {% for error in pform.hometown.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Bio</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded ">
+        <textarea class="textarea" type="text" name="bio" placeholder="Tell something about youself. Ex. what you do where are you from (optional)">{{pform.bio.value|default_if_none:''}}</textarea>
+      </p>
+      <p>
+      {% if pform.bio.errors %}
+    <ul>
+    {% for error in pform.bio.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Hometown</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input" type="text" name="hometown" value="{{pform.hometown.value|default_if_none:''}}" placeholder="Where do you live? (optional)">
+      </p>
+      <p>
+      {% if pform.homwtown.errors %}
+    <ul>
+    {% for error in pform.hometown.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Facebook</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input " type="text" name="facebook"  value="{{pform.facebook.value|default_if_none:''}}" placeholder="Enter your Facebook account or page url (optional)">
+      </p>
+      <p>
+      {% if pform.facebook.errors %}
+    <ul>
+    {% for error in pform.facebook.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Twitter</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input" type="text" name="twitter" value="{{pform.twitter.value|default_if_none:''}}" placeholder="Enter your Twitter account url (optional)">
+      </p>
+      <p>
+      {% if pform.twitter.errors %}
+    <ul>
+    {% for error in pform.twitter.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">Instagram</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input " type="text" name="instagram"  value="{{pform.instagram.value|default_if_none:''}}" placeholder="Enter your Instagram account url (optional)">
+      </p>
+      <p>
+      {% if pform.instagram.errors %}
+    <ul>
+    {% for error in pform.instagram.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+    <label class="label">YouTube</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input " type="text" name="youtube" value="{{pform.youtube.value|default_if_none:''}}" placeholder="Enter your YouTube channel url (optional)">
+      </p>
+      <p>
+      {% if pform.youtube.errors %}
+    <ul>
+    {% for error in pform.youtube.errors %}
+        <li class="help is-danger">{{ error}}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="field is-horizontal">
+  <div class="field-label">
+
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <button type="submit"  class="button is-info is-fullwidth ">
+        Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</form>
+
+{% endblock %}

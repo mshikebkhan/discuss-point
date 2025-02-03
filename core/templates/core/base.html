@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DiscussPoint - Exchange great ideas!</title>
+    <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+    <link href="{% static 'css/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+
+    <script src="{% static 'js/deleteDiscussion.js' %}"></script>
+    <script src="{% static 'js/closeDiscussion.js' %}"></script>
+    <script src="{% static 'js/saveDiscussion.js' %}"></script>
+    <script src="{% static 'js/reportDiscussion.js' %}"></script>
+    <script src="{% static 'js/reportThread.js' %}"></script>
+    <script src="{% static 'js/followDiscussion.js' %}"></script>
+    <script src="{% static 'js/likeDiscussion.js' %}"></script>
+    <script src="{% static 'js/likeThread.js' %}"></script>
+    <script src="{% static 'js/followCategory.js' %}"></script>
+    <script src="{% static 'js/reportProfile.js' %}"></script>
+    <script src="{% static 'js/deleteThread.js' %}"></script>
+    <script src="{% static 'js/saveThread.js' %}"></script>
+    <script src="{% static 'js/submitThread.js' %}"></script>
+  </head>
+  <body>
+  {% include 'core/navbar.html' %}
+  <section class="section">
+    <div class="container">
+      <br>
+      {% block content %}
+
+      {% endblock content %}
+      <br>
+    </div>
+  </section>
+  </body>
+</html>

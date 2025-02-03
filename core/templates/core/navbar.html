@@ -1,0 +1,120 @@
+{% load static %}
+
+<script src="{% static 'js/collapsedMenu.js' %}"></script>
+
+<nav class="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{% url 'core:home' %}">
+      <img src="{% static 'images/logo.jpg' %}" width="150">
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+
+      <div class="navbar-item">
+        <div class="control">
+           <form  method="GET" action="{% url 'discussion:search_discussion' %}">
+          <input required name="discussion_query" class="input is-rounded is-info has-icons-right" type="text" placeholder="Search for discussions" value="{{searched_query}}">
+          </form>
+        </div>
+      </div>
+
+      <a class="navbar-item"href="{% url 'core:home' %}">
+        <i style="color: #4A4A4A;" class="material-icons">home</i>
+        <span style="color: #4A4A4A;">Home</span>
+      </a>
+
+      <a class="navbar-item" href="{% url 'notifications:notifications' %}">
+        <i style="color: #4A4A4A;" class="material-icons">notifications</i>
+        <span style="color: #4A4A4A;">Notifications</span>
+        {% if count_notifications %}
+          &nbsp<span class="tag is-rounded is-danger"><b>{{ count_notifications }}</b></span>
+        {% endif %}
+      </a>
+
+      <a class="navbar-item" href="{% url 'users:profile' %}">
+        <i style="color: #4A4A4A;" class="material-icons">account_circle</i>
+        {% if user.is_authenticated %}
+        <span style="color: #4A4A4A;">{{request.user}}</span>
+        {% else %}
+        <span style="color: #4A4A4A;">Profile</span>
+        {% endif %}
+      </a>
+
+      <a class="navbar-item" href="{% url 'discussion:create_discussion' %}">
+        <i style="color: #4A4A4A;" class="material-icons">note_add</i>
+        <span style="color: #4A4A4A;">Create Discussion</span>
+      </a>
+
+
+      <div class="navbar-item has-dropdown is-hoverable">
+  			<a class="navbar-link"></a>
+        <div class="navbar-dropdown">
+          <a href="{% url 'discussion:followed_discussions' %}" class="navbar-item">
+            <i style="color: #4A4A4A;" class="material-icons">notifications_active</i>&nbsp
+            <span style="color: #4A4A4A;">Followed Discussions</span>
+          </a>
+
+          <a href="{% url 'discussion:saved_discussions' %}" class="navbar-item">
+            <i style="color: #4A4A4A;" class="material-icons">bookmarks</i>&nbsp
+            <span style="color: #4A4A4A;">Saved Discussions</span>
+          </a>
+
+          <a href="{% url 'discussion:saved_threads' %}" class="navbar-item">
+            <i style="color: #4A4A4A;" class="material-icons">bookmarks</i>&nbsp
+            <span style="color: #4A4A4A;">Saved Threads</span>
+          </a>
+
+          <a href="{% url 'discussion:interest' %}" class="navbar-item">
+            <i style="color: #4A4A4A;" style="color: #4A4A4A;" class="material-icons">book</i>&nbsp
+            <span style="color: #4A4A4A;">Interest</span>
+           </a>
+
+           <a href="{% url 'users:change_password' %}" class="navbar-item">
+             <i style="color: #4A4A4A;" class="material-icons">settings</i>&nbsp
+             <span style="color: #4A4A4A;">Change Passsword</span>
+           </a>
+
+          <hr class="navbar-divider">
+
+          <a class="navbar-item" href="{% url 'core:about_us' %}">
+            <i style="color: #4A4A4A;" class="material-icons">info</i>&nbsp
+            <span style="color: #4A4A4A;">About Us</span>
+          </a>
+
+          <a class="navbar-item" href="{% url 'core:contact_us' %}">
+            <i class="material-icons">contact_support</i>
+            <span style="color: #4A4A4A;">Contact Us</span>
+          </a>
+
+        </div>
+  		</div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          {% if user.is_authenticated %}
+          <a href="{% url 'users:logout' %}" class="button is-light">
+            Log out
+          </a>
+          {% else %}
+          <a  href="{% url 'users:login' %}" class="button is-info">
+            <strong>Log in</strong>
+          </a>
+          <a href="{% url 'users:signup' %}" class="button is-light">
+            Sign up
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

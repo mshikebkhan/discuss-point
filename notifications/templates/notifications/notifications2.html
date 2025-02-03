@@ -1,0 +1,116 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+<article class="message is-{{message.tags}}">
+  <div class="message-body">
+    {{message}}
+  </div>
+</article>
+{% endfor %}
+{% endif %}
+
+<div>
+    <span class="title is-size-5">Notifications 0</span>
+    <span class="is-pulled-right title is-size-5">
+        <form action="#" method="POST" >
+            {% csrf_token %}
+            <button onclick="return confirm('Do you really want to clear your all notifications?')" type="submit" class="button is-small is-light">Clear</button>
+        </form>
+    </span>
+</div>
+<hr/>
+<br>
+<div>
+
+<div class="columns is-centered">
+    <div class="column is-half is-wider">
+      <div class="notification" style="border-radius: 10px;" >
+        <a href="" style="text-decoration: none;">
+          <strong>Mohd Shikeb Khan</strong>@mshikebkhan
+        </a>
+        <br>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="material-icons">note_add</i>
+          </span>
+          <span>Submitted a new thread in your discussion.</span>
+        </span>
+        <br>
+        <p><small>"You must buy a pc rather then a laptop for a good dev..."</small></p>
+        <strong><small>2 hours ago</small></strong>
+      </div>
+    </div>
+</div>
+
+<div class="columns is-centered">
+    <div class="column is-half is-wider">
+      <div class="notification" style="border-radius: 10px;" >
+        <a href="" style="text-decoration: none;">
+          <strong>Mohd Shikeb Khan</strong>@mshikebkhan
+        </a>
+        <br>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="material-icons">note_add</i>
+          </span>
+          <span>Submitted a new thread the discussion you follows.</span>
+        </span>
+        <br>
+        <p><small>"You must buy a pc rather then a laptop for a good dev..."</small></p>
+        <strong><small>2 hours ago</small></strong>
+      </div>
+    </div>
+</div>
+
+
+<div class="columns is-centered">
+    <div class="column is-half is-wider">
+      <div class="notification" style="border-radius: 10px;" >
+        <a href="" style="text-decoration: none;">
+          <strong>Mohd Shikeb Khan</strong>@mshikebkhan
+        </a>
+        <br>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="material-icons">thumb_up</i>
+          </span>
+          <span>Liked your thread.</span>
+        </span>
+        <br>
+        <p><small>"You must buy a pc rather then a laptop for a good dev..."</small></p>
+        <strong><small>2 hours ago</small></strong>
+      </div>
+    </div>
+</div>
+
+
+<div class="columns is-centered">
+    <div class="column is-half is-wider">
+      <div class="notification" style="border-radius: 10px;" >
+        <a href="" style="text-decoration: none;">
+          <strong>Mohd Shikeb Khan</strong>@mshikebkhan
+        </a>
+        <br>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="material-icons">thumb_up</i>
+          </span>
+          <span>Liked your discussion.</span>
+        </span>
+        <br>
+        <p><small>"You must buy a pc rather then a laptop for a good dev..."</small></p>
+        <strong><small>2 hours ago</small></strong>
+      </div>
+    </div>
+</div>
+
+
+<center>
+   <img src="{% static 'images/empty-notifications.png' %}" style="height: 100px; width: 90px;">
+   <br>No unread notifications.
+</center>
+
+{% endblock content %}

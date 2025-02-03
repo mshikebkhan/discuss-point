@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+
+{% if user == request.user %}
+<p Class="title is-size-5">Saved Discussions <span id="id_saved_discussions_count" class="is-pulled-right">{{discussions_count}}</span></p>
+{% else %}
+<p Class="title is-size-5">{{user.first_name}}'s Discussions <span class="is-pulled-right">{{discussions_count}}</span></p>
+{% endif %}
+<hr>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider" >
+
+  {% for discussion in discussions %}
+  {% include 'discussion/discussion_div.html' %}
+  {% empty %}
+  <center>
+     <img src="{% static 'images/empty-folder.png' %}" style="height: 100px; width: 100px;">
+     <br>Saved discussions will appear here.
+  </center>
+  {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}

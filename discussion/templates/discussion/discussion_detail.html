@@ -1,0 +1,139 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if anchor %}
+<script type='text/javascript'>
+
+$(document).ready(function(){
+         $('html, body').animate({
+              scrollTop: $("#id_thread_{{anchor}}").offset().top - 85
+        }, 1000);
+});
+</script>
+{% endif %}
+
+
+<div class="columns is-centered ">
+  <div class="column is-four-fifths is-wider" >
+
+<div class="discssion_detail">
+  <p>
+    Created by
+    {% if discussion.user == request.user %}
+    <a  href="{% url 'users:profile' %}">
+    {% else %}
+    <a  href="{% url 'users:user_profile' discussion.user %}">
+    {% endif %}
+    {{discussion.user.first_name}} {{discussion.user.last_name}}
+    </a>
+    <span class="is-pulled-right">On {{discussion.date_created|date}}</span>
+  </p>
+    <br>
+    <p class="title is-size-3 is-size-4-mobile">
+    {{discussion.title}}
+    </p>
+    {% if discussion.description %}
+    <p class="subtitle is-size-5 is-size-6-mobile">
+      {{discussion.description}}
+    </p>
+    {% endif %}
+    <p>
+    Views <b>{{discussion.views}}</b> • Likes <b id="id_discussion_likes_count_{{discussion.id}}">{{discussion.likes}}</b> • Threads <b id="id_threads_count">{{discussion.threads_count}}</b> • Category <a href="{% url 'discussion:category_detail' discussion.category %}">{{discussion.category}}</a>
+{% if discussion.user != request.user %}
+      {% if request.user in followers %}
+      <span class="is-pulled-right"><button onclick="followDiscussion(this)" id="id_discussion_follow_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-rounded is-primary">Following</button></span>
+      {% else %}
+      <span class="is-pulled-right"><button onclick="followDiscussion(this)" id="id_discussion_follow_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-rounded is-light">Follow</button></span>
+      {% endif %}
+{% endif %}
+    </p>
+
+
+
+    {% if discussion.user == request.user %}
+        <footer class="card-footer" style="margin-top: 20px;">
+          <a class="card-footer-item">
+            <button  onclick="deleteDiscussion(this)" name="{{discussion.id}}" class="button is-small is-light">Delete</button>
+          </a>
+          <a  class="card-footer-item">
+            {% if discussion.closed %}
+            <button onclick="closeDiscussion(this)" id="id_discussion_close_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-danger">Closed</button>
+            {% else %}
+            <button onclick="closeDiscussion(this)" id="id_discussion_close_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Close</button>
+            {% endif %}
+          </a>
+          <a  class="card-footer-item">
+            {% if discussion in saved_discussions %}
+            <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-success">Saved</button>
+            {% else %}
+            <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Save</button>
+            {% endif %}
+          </a>
+        </footer>
+    {% else %}
+    <footer class="card-footer" style="margin-top: 20px;">
+        {% if discussion.reported %}
+      <a class="card-footer-item is-idle">
+        <button id="id_discussion_report_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-danger is-idle">Reported</button>
+      </a>
+      {% else %}
+      <a id="id_discussion_report_a_{{discussion.id}}" class="card-footer-item">
+        <button onclick="reportDiscussion(this)" id="id_discussion_report_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Report</button>
+      </a>
+      {% endif %}
+
+      <a  class="card-footer-item">
+        {% if discussion in liked_discussions %}
+        <button onclick="likeDiscussion(this)" id="id_discussion_like_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-info">Liked</button>
+        {% else %}
+        <button onclick="likeDiscussion(this)" id="id_discussion_like_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Like</button>
+        {% endif %}
+      </a>
+
+      <a  class="card-footer-item">
+        {% if discussion in saved_discussions %}
+        <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-success">Saved</button>
+        {% else %}
+        <button onclick="saveDiscussion(this)" id="id_discussion_save_button_{{discussion.id}}" name="{{discussion.id}}" class="button is-small is-light">Save</button>
+        {% endif %}
+      </a>
+    </footer>
+    {% endif %}
+</div>
+
+{% if discussion.closed == False %}
+<form autocomplete="off" id="id_submit_thread_form" style="margin-top: 30px;">
+  <textarea id="id_thread_content" class="textarea is-medium is-info" placeholder="Submit a thread."></textarea>
+  <br>
+  <button onclick="submitThread(this)" id="id_submit_thread_submit_button" name="{{discussion.id}}" class="button is-info">Submit</button>
+</form>
+{% else %}
+<br>
+<article class="message is-danger">
+  <div class="message-body">
+    This discussion has been closed by {{discussion.user.first_name}}, new threads will not be accepted.
+  </div>
+</article>
+<br>
+{% endif %}
+
+<div id="id_for_empty"></div>
+{% for thread in threads %}
+<div id="id_new_thread"></div>
+  {% include 'discussion/thread_div2.html' %}
+{% empty %}
+<center>
+  <div  id="id_empty_threads_message">
+   <img src="{% static 'images/empty-folder.png' %}" style="height: 100px; width: 100px;">
+   <br>No threads submitted.
+   </div>
+</center>
+{% endfor %}
+
+
+
+
+
+
+{% endblock content %}

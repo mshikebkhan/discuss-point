@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+
+{% if user == request.user %}
+<p Class="title is-size-5">Saved Threads <span id="id_saved_threads_count" class="is-pulled-right">{{threads_count}}</span></p>
+{% else %}
+<p Class="title is-size-5">{{user.first_name}}'s Threads <span class="is-pulled-right">{{threads_count}}</span></p>
+{% endif %}
+<hr>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider" >
+
+  {% for thread in threads %}
+  {% include 'discussion/thread_div.html' %}
+  {% empty %}
+  <center>
+     <img src="{% static 'images/empty-folder.png' %}" style="height: 100px; width: 100px;">
+     <br>Saved threads will appear here.
+  </center>
+  {% endfor %}
+
+  </div>
+</div>
+
+{% endblock %}

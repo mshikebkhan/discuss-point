@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+<article class="message is-{{message.tags}}">
+  <div class="message-body">
+    {{message}}
+  </div>
+</article>
+{% endfor %}
+{% endif %}
+
+<div>
+      <span class="title is-size-5">@{{profile.user}}</span>
+      {% if profile.verified %}
+      <span>
+        <img src="{% static 'images/verified.png' %}" alt=":)" height="20px" width="20px">
+      </span>
+      {% endif %}
+    <span class="is-pulled-right title is-size-5">
+      {% if profile.user == request.user %}
+        <a href="{% url 'users:edit_profile' %}" type="submit" class="button is-small is-light">Edit profile</a>
+        {% else %}
+
+        {% if profile.reported %}
+        <button id="id_profile_report_button_{{profile.id}}" name="{{profile.id}}" class="button is-small is-danger is-idle">Reported</button>
+      {% else %}
+        <button onclick="reportProfile(this)" id="id_profile_report_button_{{profile.id}}" name="{{profile.id}}" class="button is-small is-light">Report</button>
+      {% endif %}
+
+
+        {% endif %}
+    </span>
+</div>
+<hr/>
+
+
+<p class="title is-size-3 is-size-4-mobile">{{profile.user.first_name}} {{profile.user.last_name}}</p>
+{% if profile.bio %}
+<p class="subtitle is-size-5">{{profile.bio|linebreaks}}<br></p>
+{% endif %}
+
+<div class="field is-grouped is-grouped-multiline">
+
+
+  <div class="control">
+    <div class="tags has-addons">
+      {% if profile.user == request.user %}
+      <span class="tag is-dark"><a style="color: inherit" href="{% url 'discussion:discussions' %}">Discussions</a></span>
+      {% else %}
+      <span class="tag is-dark"><a style="color: inherit" href="{% url 'discussion:user_discussions' profile.user %}">Discussions</a></span>
+      {% endif %}
+      <span class="tag is-info">{{profile.discussions_count}}</span>
+    </div>
+  </div>
+
+  <div class="control">
+    <div class="tags has-addons">
+      {% if profile.user == request.user %}
+      <span class="tag is-dark"><a style="color: inherit" href="{% url 'discussion:threads' %}">Threads</a></span>
+      {% else %}
+      <span class="tag is-dark"><a style="color: inherit" href="{% url 'discussion:user_threads' profile.user %}">Threads</a></span>
+      {% endif %}
+      <span class="tag is-info">{{profile.threads_count}}</span>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle is-size-5">Gender: <b>{{profile.gender}}</b></p>
+{% if profile.age %}
+<p class="subtitle is-size-5">Age: <b>18</b></p>
+{% endif %}
+<p class="subtitle is-size-5">Member since: <b>{{profile.user.date_joined|timesince}}</b></p>
+{% if profile.hometown %}
+<p class="subtitle is-size-5">Hometown: <b>UP, India</b></p>
+{% endif %}
+{% if profile.facebook or profile.twitter or profile.instagram or profile.youtube %}
+<p class="subtitle is-size-5">Social connections: {% if profile.facebook %}<a href="{{profile.facebook}}"><b>Facebook</b></a> • {% endif %} {% if profile.twitter %}<a><b>Twitter</b></a> • {% endif %} {% if profile.instagram %}<a><b>Instagram</b></a> • {% endif %} {% if profile.youtube %}<a><b>YouTube</b></a>{% endif %}</p>
+{% endif %}
+
+
+
+{% endblock content %}

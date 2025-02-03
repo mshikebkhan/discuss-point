@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+{% block content %}
+{% load static %}
+
+{% if messages %}
+    {% for message in messages %}
+<article class="message is-{{message.tags}}">
+  <div class="message-body">
+    {{message}}
+  </div>
+</article>
+{% endfor %}
+{% endif %}
+
+<div class="columns is-centered has-text-centered">
+<div class="column is-wider is-narrow-tablet is-half-desktop">
+        <div class="card" style="border: 2px solid #3298DC;">
+            <div class="card-content">
+
+            <figure style="margin-bottom: 10px;">
+            <img src="{% static 'images/logo.jpg'%}" width="50%">
+            </figure>
+
+                <form method="post" autocomplete="off" action="{% url 'users:signup' %}">
+                    {% csrf_token %}
+
+
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+
+                            <div class="field">
+                                <p class="control is-expanded ">
+                                    <input  class="input" maxlength="20"  name="first_name" required id="id_first_name" value="{{first_name}}"  type="text" placeholder="Enter your first name">
+                                </p>
+                                <p class="help is-danger">
+                            {% if form.first_name.errors %}
+                        <ul>
+                            {% for error in form.first_name.errors %}
+                            <li><strong style="color: red;">{{ error|escape }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                                </p>
+                            </div>
+
+                            <div class="field">
+                                <p class="control is-expanded">
+                                    <input class="input" maxlength="20"  name="last_name" required id="id_last_name" value="{{last_name}}"  type="text" placeholder="Enter your last name" >
+                                                                    </p>
+                                <p class="help is-danger">
+                            {% if form.last_name.errors %}
+                        <ul>
+                            {% for error in form.last_name.errors %}
+                            <li><strong style="color: red;">{{ error|escape }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" maxlength="20"  name="username"  type="text" placeholder="Enter a unique username" required id="id_username" value="{{username}}">
+                            <span class="icon is-small is-left">
+                            <i style="color: black;" class="material-icons">account_circle</i>
+                            </span>
+                                                            </p>
+                                <p class="help is-danger">
+                            {% if form.username.errors %}
+                        <ul>
+                            {% for error in form.username.errors %}
+                            <li><strong style="color: red;">{{ error|escape }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input"   name="email" type="email" placeholder="Enter your valid email" required id="id_email" value="{{email}}">
+                            <span class="icon is-small is-left">
+                            <i style="color: black;" class="material-icons">email</i>
+                            </span>
+                        </p>
+
+                            {% if form.email.errors %}
+                             <p class="help is-danger">
+                        <ul>
+                            {% for error in form.email.errors %}
+                            <li><strong style="color: red;">{{ error|escape }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                             </p>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" autocomplete="new-password"  name="password1" type="password" placeholder="Enter your password" required id="id_password1" value="{{password1}}">
+                            <span class="icon is-small is-left">
+                            <i style="color: black;" class="material-icons">lock</i>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input"  name="password2" type="text" placeholder="Confirm your password" required id="id_password2" value="{{password2}}">
+                            <span class="icon is-small is-left">
+                            <i style="color: black;" class="material-icons-outlined">lock</i>
+                            </span>
+                                                            </p>
+                                <p class="help is-danger">
+                            {% if form.password2.errors %}
+                        <ul>
+                            {% for error in form.password2.errors %}
+                            <li><strong style="color: red;">{{ error|escape }}</strong></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        </p>
+                    </div>
+                        <p class="help" style="padding-bottom: 5px;">
+                          By clicking Sign up button, you agree to our <a href="{% url 'core:privacy_policy'  %}" >Privacy Policy</a> and <a href="{% url 'core:terms_and_conditions'  %}" >Terms & Conditions</a>
+                        </p>
+
+                    <div class="field">
+                        <p class="control">
+                            <button type="submit" class="button is-info is-fullwidth ">
+                            Sign up
+                            </button>
+                        </p>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+        <br/>
+
+
+
+        <p class="subtitle is-6 ">Already have an account? <a href="{% url 'users:login' %}" >Login</a></p>
+
+
+    </div>
+</div>
+
+
+
+
+
+{% endblock  %}

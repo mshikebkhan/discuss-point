@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<p class="title is-size-5">Customize your interest</p>
+<hr>
+
+{% for category in categories %}
+  <p class="title is-size-5"><a href="{% url 'discussion:category_detail' category.title %}">{{category.title}}</a>
+    <span class="is-pulled-right">
+      {% if category in followed_categories %}
+      <button id="id_category_follow_button_{{category.id}}" name="{{category.id}}" onclick="followCategory(this)" class="button is-info is-small">Following</button>
+      {% else %}
+      <button id="id_category_follow_button_{{category.id}}" name="{{category.id}}" onclick="followCategory(this)" class="button is-light is-small">Follow</button>
+      {% endif %}
+    </span>
+  </p>
+{% endfor %}
+
+
+{% endblock content %}

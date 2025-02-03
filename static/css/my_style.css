@@ -1,0 +1,15 @@
+.column.is-wider{
+padding-right : 0;
+padding-left : 0;
+}
+
+a.is-idle{
+  pointer-events:none;
+  cursor:default;
+  text-decoration:none
+  }
+
+button.is-idle{
+  pointer-events:none;
+  cursor:default
+}

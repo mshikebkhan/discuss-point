@@ -1,0 +1,139 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+<article class="message is-{{message.tags}}">
+  <div class="message-body">
+    {{message}}
+  </div>
+</article>
+{% endfor %}
+{% endif %}
+
+<div>
+    <span class="title is-size-5">Notifications {{notifications_count}}</span>
+    <span class="is-pulled-right title is-size-5">
+        <form action="{% url 'notifications:clear_notifications' %}" method="POST" >
+            {% csrf_token %}
+            <button onclick="return confirm('Do you really want to clear your all notifications?')" type="submit" class="button is-small is-light">Clear</button>
+        </form>
+    </span>
+</div>
+<hr/>
+<br>
+<div>
+
+  <div class="columns is-centered">
+  <div class="column is-half is-wider">
+
+{% for notification in notifications %}
+
+{% if notification.notification_type == 1 %}
+      <div class="notification" style="border-radius: 10px;" >
+        <a href="{% url 'users:user_profile' notification.sender %}" style="text-decoration: none;">
+          <strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}
+        </a>
+        <br>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="material-icons">thumb_up</i>
+          </span>
+          <span>Liked your discussion.</span>
+        </span>
+        <br>
+        <p><small><a style="text-decoration:none" href="{% url 'discussion:discussion_detail' notification.discussion.id %}">"{{notification.discussion}}"</a></small></p>
+        <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+      </div>
+{% endif %}
+
+{% if notification.notification_type == 2 %}
+      <div class="notification" style="border-radius: 10px;" >
+        <a href="{% url 'users:user_profile' notification.sender %}" style="text-decoration: none;">
+          <strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}
+        </a>
+        <br>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="material-icons">thumb_up</i>
+          </span>
+          <span>Liked your thread.</span>
+        </span>
+        <br>
+        <p><small><a style="text-decoration:none" href="{% url 'discussion:specefic_thread' notification.thread.discussion.id notification.thread.id %}">"{{notification.thread}}"</a></small></p>
+        <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+      </div>
+{% endif %}
+
+{% if notification.notification_type == 3  %}
+
+<div class="notification" style="border-radius: 10px;" >
+  <a href="{% url 'users:user_profile' notification.sender %}" style="text-decoration: none;">
+    <strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}
+  </a>
+  <br>
+  <span class="icon-text">
+    <span class="icon">
+      <i class="material-icons">note_add</i>
+    </span>
+    <span>Submitted a new thread in your discussion.</span>
+  </span>
+  <br>
+  <p><small><a style="text-decoration:none" href="{% url 'discussion:specefic_thread' notification.discussion.id notification.thread.id %}">"{{notification.preview}}"</a></small></p>
+  <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+</div>
+
+{% endif %}
+
+{% if notification.notification_type == 4  %}
+
+<div class="notification" style="border-radius: 10px;" >
+  <a href="{% url 'users:user_profile' notification.sender %}" style="text-decoration: none;">
+    <strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}
+  </a>
+  <br>
+  <span class="icon-text">
+    <span class="icon">
+      <i class="material-icons">note_add</i>
+    </span>
+    <span>Submitted a new thread in the discussion you follows.</span>
+  </span>
+  <br>
+  <p><small><a style="text-decoration:none" href="{% url 'discussion:specefic_thread' notification.discussion.id notification.thread.id %}">"{{notification.preview}}"</a></small></p>
+  <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+</div>
+
+{% endif %}
+
+{% if notification.notification_type == 5  %}
+
+<div class="notification" style="border-radius: 10px;" >
+    <strong>Mohd Shikeb Khan</strong>
+<span><img src="{% static 'images/verified.png' %}" alt=":)" height="15px" width="15px"></span>
+     (Admin)
+  <br>
+  <span class="icon-text">
+    <span class="icon">
+      <i class="material-icons">note_add</i>
+    </span>
+    <span>Created a new post.</span>
+  </span>
+  <br>
+  <p><small>"{{notification.post}}"</small></p>
+  <strong><small>{{notification.date_created|timesince}} ago</small></strong>
+</div>
+
+{% endif %}
+
+{% empty %}
+<center>
+   <img src="{% static 'images/empty-notifications.png' %}" style="height: 100px; width: 90px;">
+   <br>No unread notifications.
+</center>
+{% endfor %}
+
+  </div>
+</div>
+
+{% endblock content %}

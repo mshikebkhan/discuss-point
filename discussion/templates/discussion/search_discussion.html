@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<div class="columns is-centered">
+<div class="column is-wider is-narrow-tablet is-half-desktop">
+
+<div class="box is-hidden-desktop" style="border-radius: 19px; ">
+  <p>
+    <strong class="is-size-1-desktop is-size-2-tablet is-size-4-mobile ">Search for discussions</strong>
+  </p>
+<br>
+  <form method="GET" action="{% url 'discussion:search_discussion' %}">
+    <div class="field is-grouped ">
+      <p class="control is-expanded">
+        <input required  name="discussion_query" class="input is-rounded is-info has-icons-right" type="text" placeholder="Enter your query" value="{{searched_query}}" >
+      </p>
+    </div>
+  </form>
+</div>
+
+
+
+{% for discussion in discussions %}
+{% include 'discussion/discussion_div.html' %}
+
+{% empty %}
+    <br/>
+    <p class="title is-4">No results found for your query !</p>
+    <p class="title is-5" style="padding-bottom: 20px;">Suggestions:</p>
+    <li class="subtitle is-size-6 is-size-7-mobile">Make sure that your query not very less and not very much characters.</li>
+    <li class="subtitle is-size-6 is-size-7-mobile">Try different keywords to get your desired results.</li>
+    <li class="subtitle is-size-6 is-size-7-mobile">Type your query in a simple form. ex-What is an atom?</li>
+
+{% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock  %}

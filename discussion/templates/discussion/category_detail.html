@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<p class="title is-size-4">{{category}}
+   <span class="is-pulled-right">
+     {% if category in followed_categories %}
+     <button id="id_category_follow_button_{{category.id}}" name="{{category.id}}" onclick="followCategory(this)" class="button is-info is-small">Following</button>
+     {% else %}
+     <button id="id_category_follow_button_{{category.id}}" name="{{category.id}}" onclick="followCategory(this)" class="button is-light is-small">Follow</button>
+     {% endif %}
+   </span>
+</p>
+<p style="padding-top: 10px;" class="subtitle is-size-6">Discussions <b id="id_discussions_count">{{category.discussions_count}}</b>
+   <span class="is-pulled-right">
+    Followers <b id="id_followers_count">{{category.followers}}</b>
+   </span>
+</p>
+<hr>
+
+<div class="columns is-centered">
+  <div class="column is-half is-wider" >
+
+{% for discussion in discussions %}
+{% include 'discussion/discussion_div.html' %}
+{% empty %}
+<br>
+<br>
+<center>
+  <figure>
+    <img src="{% static 'images/empty-folder.png' %}" style="height: 100px; width: 100px;">
+  </figure>
+   <br>No discussions are created in this category.
+</center>
+{% endfor %}
+
+</div>
+</div>
+
+
+{% endblock content %}

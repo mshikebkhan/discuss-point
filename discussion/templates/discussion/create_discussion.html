@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<article class="message is-{{message.tags}}">
+  <div class="message-body">
+    {{message}}
+  </div>
+</article>
+{% endfor %}
+{% endif %}
+
+<p Class="title is-size-5">Create discussion</p>
+<hr>
+
+<form method="POST" autocomplete="off">
+  {% csrf_token %}
+ <div class="field">
+   <label class="label">Title</label>
+   <div class="control">
+     <input class="input" type="text" name="title"  required id="id_title" maxlength="100" placeholder="e.g. Best adventure movies based on jungles">
+   </div>
+
+   <p class="help is-danger">
+    {% if form.title.errors %}
+    <ul>
+    {% for error in form.title.errors %}
+    <li><strong style="color: red;">{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </p>
+
+ </div>
+
+
+ <div class="field">
+   <label class="label">Category</label>
+   <div class="control">
+     <div class="select">
+       {{form.category}}
+     </div>
+   </div>
+
+   <p class="help is-danger">
+    {% if form.category.errors %}
+    <ul>
+    {% for error in form.category.errors %}
+    <li><strong style="color: red;">{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </p>
+
+ </div>
+
+ <div class="field">
+   <label class="label" >Description</label>
+   <div class="control">
+     <textarea class="textarea" name="description" rid="id_description" maxlength="150" placeholder="Describe your discussion (optional)"></textarea>
+   </div>
+
+   <p class="help is-danger">
+    {% if form.description.errors %}
+    <ul>
+    {% for error in form.description.errors %}
+    <li><strong style="color: red;">{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </p>
+
+ </div>
+
+
+
+   <div class="control">
+     <button type="submit" class="button is-info">Create</button>
+   </div>
+</form>
+
+{% endblock %}
