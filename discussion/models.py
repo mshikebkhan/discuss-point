@@ -23,12 +23,12 @@ class Category(models.Model):
 
 
 #category_choices
-category_choices = Category.objects.values_list('title', 'title')
+#category_choices = Category.objects.values_list('title', 'title')
 
 class Discussion(models.Model):
     """Discussion"""
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    category = models.CharField(max_length=300, choices=category_choices)
+    category = models.CharField(max_length=300)
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=150, null=True, blank=True)
     date_created=models.DateTimeField(auto_now_add=True, null=True)
