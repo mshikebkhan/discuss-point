@@ -1,1 +1,1 @@
-web: gunicorn discuss_point.wsgi 
+web: gunicorn website.wsgi 
