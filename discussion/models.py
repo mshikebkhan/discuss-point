@@ -28,9 +28,9 @@ class Category(models.Model):
 class Discussion(models.Model):
     """Discussion"""
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    category = models.CharField(max_length=300)
-    title = models.CharField(max_length=100)
-    description = models.TextField(max_length=150, null=True, blank=True)
+    category = models.CharField(max_length=120)
+    title = models.CharField(max_length=120)
+    description = models.TextField(max_length=300, null=True, blank=True)
     date_created=models.DateTimeField(auto_now_add=True, null=True)
 
     views = models.PositiveIntegerField(default=0)
@@ -53,7 +53,7 @@ class Thread(models.Model):
     """Threads on Discussions"""
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     discussion = models.ForeignKey(Discussion, on_delete=models.CASCADE)
-    content = models.TextField(max_length=300, null=True, blank=True)
+    content = models.TextField(max_length=2000, null=True, blank=True)
     date_created=models.DateTimeField(auto_now_add=True, null=True)
 
     likes = models.PositiveIntegerField(default=0)
