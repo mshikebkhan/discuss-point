@@ -17,15 +17,15 @@ class AdminPost(models.Model):
         """Add notification if admin created a new post."""
         post = instance
         for user in  User.objects.all():
-            if user != post.user:
-                notify = Notification(post=post, user=user, sender=post.user, notification_type=5)
+            if user.username != "admin":
+                notify = Notification(post=post, user=user, notification_type=5)
                 notify.save()
 
     def admin_delete_post(sender, instance, *args, **kwargs):
         """Remove notification if admin delete post."""
         post = instance
         for user in  User.objects.all():
-            notify = Notification.objects.filter(post=post, user=user,sender=post.user, notification_type=5)
+            notify = Notification.objects.filter(post=post, user=user, notification_type=5)
             notify.delete()
 
 # Admin Post Notify
