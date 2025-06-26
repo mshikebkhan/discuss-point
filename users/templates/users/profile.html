@@ -74,7 +74,7 @@
 {% endif %}
 <p class="subtitle is-size-5">Member since: <b>{{profile.user.date_joined|timesince}}</b></p>
 {% if profile.hometown %}
-<p class="subtitle is-size-5">Hometown: <b>UP, India</b></p>
+<p class="subtitle is-size-5">Hometown: <b>{{profile.hometown}}</b></p>
 {% endif %}
 {% if profile.facebook or profile.twitter or profile.instagram or profile.youtube %}
 <p class="subtitle is-size-5">Social connections: {% if profile.facebook %}<a href="{{profile.facebook}}"><b>Facebook</b></a> • {% endif %} {% if profile.twitter %}<a><b>Twitter</b></a> • {% endif %} {% if profile.instagram %}<a><b>Instagram</b></a> • {% endif %} {% if profile.youtube %}<a><b>YouTube</b></a>{% endif %}</p>
