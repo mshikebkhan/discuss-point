@@ -39,14 +39,14 @@ def submit_thread(request, discussion_id):
             discussion = Discussion.objects.get(id=discussion_id)
             if not discussion.closed:
                 content = request.POST.get('content')
-                if len(content) > 0 and len(content) < 301 :
+                if len(content) > 0 and len(content) < 1500 :
                     thread = Thread.objects.create(user=request.user, discussion=discussion, content=content)
                     response_data['status'] = "submitted"
                     response_data['user'] = thread.user.first_name+' '+thread.user.last_name
                     response_data['content'] = content
                     response_data['id'] = thread.id
                 else:
-                    response_data['status'] = 'error'
+                    response_data['status'] = 'Character limit(1500) exceeds'
             else:
                 response_data['status'] = 'closed'
         else:
