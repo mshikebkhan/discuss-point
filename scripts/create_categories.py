@@ -1,7 +1,7 @@
 # scripts/create_categories.py
 # It will create categories
 
-from core.models import Category  # adjust to your actual Category model path
+from discussion.models import Category  # adjust to your actual Category model path
 
 CATEGORIES = [
     "Technology",
