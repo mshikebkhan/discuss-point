@@ -109,7 +109,7 @@
 {% if notification.notification_type == 5  %}
 
 <div class="notification" style="border-radius: 10px;" >
-    <strong>Mohd Shikeb Khan</strong>
+    <strong>{{notification.sender.first_name}} {{notification.sender.last_name}}</strong>@{{notification.sender}}
 <span><img src="{% static 'images/verified.png' %}" alt=":)" height="15px" width="15px"></span>
      (Admin)
   <br>
