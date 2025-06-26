@@ -20,5 +20,5 @@ CATEGORIES = [
 ]
 
 def run():
-    for name in CATEGORIES:
-        Category.objects.get_or_create(name=name)
+    for title in CATEGORIES:
+        Category.objects.get_or_create(title=name)
