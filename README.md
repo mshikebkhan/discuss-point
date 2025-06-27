@@ -13,7 +13,7 @@ It's a space where you can ask questions, share your knowledge, and connect with
 
 ## 🌐 Live Website
 
-🔗 [https://your-render-url.com](https://your-render-url.com)]
+🔗 https://discuss-point.onrender.com/
 
 ---
 
