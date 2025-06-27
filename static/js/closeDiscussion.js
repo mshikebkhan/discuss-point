@@ -13,7 +13,8 @@ function closeDiscussion(button) {
         success:function(json){
 
             if(json.status == "closed"){
-
+                
+            $("#id_submit_thread_form").addClass("is-hidden");
             $("#id_discussion_close_button_"+discussion_id).html("Closed")
             document.getElementById("id_discussion_close_button_"+discussion_id).setAttribute( "class", "button is-small is-danger");
 
@@ -24,6 +25,7 @@ function closeDiscussion(button) {
                  },10)
 
           } else if(json.status == "open"){
+                $("#id_submit_thread_form").removeClass("is-hidden");
             $("#id_discussion_close_button_"+discussion_id).html("Close")
             document.getElementById("id_discussion_close_button_"+discussion_id).setAttribute( "class", "button is-small is-light");
 
