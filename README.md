@@ -32,7 +32,7 @@ It's a space where you can ask questions, share your knowledge, and connect with
 
 | Screenshot | Description |
 |------------|-------------|
-| ![Home0](screen_shots/home_0.png) | Shows welcome page. |
+| ![Home0](screen_shots/home_0.PNG) | Shows welcome page. |
 | ![Home1](screen_shots/home_1.png) | Shows users feed. |
 | ![Login/Register](screen_shots/user_auth_form.png) | Basic login and registration forms. |
 | ![Create Post](screen_shots/create_discussion.png) | Authenticated users can create a discussion. |
