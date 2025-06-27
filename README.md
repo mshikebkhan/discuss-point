@@ -17,22 +17,6 @@ It's a space where you can ask questions, share your knowledge, and connect with
 
 ---
 
-## 📸 Screenshots
-
-| Screenshot | Description |
-|------------|-------------|
-| ![Home0](screen_shots/home0.png) | Shows welcome page. |
-| ![Home1](screen_shots/home1.png) | Shows users feed. |
-| ![Login/Register](screen_shots/auth.png) | Basic login and registration forms. |
-| ![Create Post](screen_shots/create.png) | Authenticated users can create a discussion. |
-| ![Post View](screen_shots/post.png) | Displays a post with replies threaded below it. |
-| ![Profile](screen_shots/profile.png) | Shows users profile page. |
-| ![Notifications](screen_shots/notifications.png) | Shows notifications page. |
-
-
-
----
-
 ## 🚀 Features
 
 ❓ Ask and Answer – Easily post your questions or provide answers on a variety of topics.
@@ -41,6 +25,20 @@ It's a space where you can ask questions, share your knowledge, and connect with
 👥 Follow System – Stay updated by following users and topics that resonate with you.
 ✨ Clean and Responsive Design – Enjoy a straightforward, user-friendly interface for an optimal experience.
 📲 Mobile responsive design
+
+---
+
+## 📸 Screenshots
+
+| Screenshot | Description |
+|------------|-------------|
+| ![Home0](screen_shots/home_0.png) | Shows welcome page. |
+| ![Home1](screen_shots/home_1.png) | Shows users feed. |
+| ![Login/Register](screen_shots/user_auth_form.png) | Basic login and registration forms. |
+| ![Create Post](screen_shots/create_discussion.png) | Authenticated users can create a discussion. |
+| ![Post View](screen_shots/discussion_detail.png) | Displays a post with replies threaded below it. |
+| ![Profile](screen_shots/profile.png) | Shows users profile page. |
+| ![Notifications](screen_shots/notifications.png) | Shows notifications page. |
 
 ---
 
@@ -66,7 +64,6 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
-
 ---
 
 ## 👥 Contributing
