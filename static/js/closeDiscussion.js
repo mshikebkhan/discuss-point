@@ -30,7 +30,7 @@ function closeDiscussion(button) {
           } else if(json.status == "open"){
                 
             if ($("#id_submit_thread_form").length) {
-                $("#id_submit_thread_form").addClass("is-hidden");
+                $("#id_submit_thread_form").removeClass("is-hidden");
             }
                 
             $("#id_discussion_close_button_"+discussion_id).html("Close")
