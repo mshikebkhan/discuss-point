@@ -9,7 +9,7 @@ def get_category_choices():
 
 class DiscussionForm(forms.ModelForm):
     title = forms.CharField(max_length=100)
-    category = forms.ChoiceField(choices=get_category_choices, widget=forms.Select, required=True)
+    category = forms.ChoiceField(choices=get_category_choices, widget=forms.Select, required=True, initial='Other')
     description = forms.Textarea()
     class Meta():
         model = Discussion
