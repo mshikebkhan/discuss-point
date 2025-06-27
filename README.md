@@ -78,11 +78,7 @@ python manage.py runserver
 
 ## 📌 TODO Ideas
 
-- Add pagination to the post list
-- User profile pages
-- Markdown support for posts
-- Likes or Upvotes
-- Real-time notifications
+- Customised user feed for the user based on their likes, saves, & Interests
 
 ---
 
