@@ -32,13 +32,13 @@ It's a space where you can ask questions, share your knowledge, and connect with
 
 | Screenshot | Description |
 |------------|-------------|
-| ![Home0](screen_shots/home_0.PNG) | Home Page / Welcome Page |
-| ![Home1](screen_shots/home_1.PNG) | Authenticated User Home Page |
-| ![Login/Register](screen_shots/user_auth_form.PNG) | Login Page. |
-| ![Create Post](screen_shots/create_discussion.PNG) | Create Discussion Page. |
-| ![Post View](screen_shots/discussion_detail.PNG) | A Discussion with replies threaded below it. |
-| ![Profile](screen_shots/profile.PNG) | User Profile page. |
-| ![Notifications](screen_shots/notifications.PNG) | Notifications page. |
+| ![Home0](screenshots/home_0.PNG) | Home Page / Welcome Page |
+| ![Home1](screenshots/home_1.PNG) | Authenticated User Home Page |
+| ![Login/Register](screenshots/user_auth_form.PNG) | Login Page. |
+| ![Create Post](screenshots/create_discussion.PNG) | Create Discussion Page. |
+| ![Post View](screenshots/discussion_detail.PNG) | A Discussion with replies threaded below it. |
+| ![Profile](screenshots/profile.PNG) | User Profile page. |
+| ![Notifications](screenshots/notifications.PNG) | Notifications page. |
 
 ---
 
