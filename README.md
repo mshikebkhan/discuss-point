@@ -37,7 +37,7 @@ It's a space where you can ask questions, share your knowledge, and connect with
 | ![Login/Register](screenshots/user_auth_form.PNG) | Login Page |
 | ![Create Post](screenshots/create_discussion.PNG) | Create Discussion Page |
 | ![Post View](screenshots/discussion_detail.PNG) | A Discussion with replies threaded below it. |
-| ![Profile](screenshots/profile.PNG) | User Profile Page |
+| ![Profile](screenshots/user_profile.PNG) | User Profile Page |
 | ![Notifications](screenshots/notifications.PNG) | Notifications Page |
 
 ---
