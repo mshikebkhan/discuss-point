@@ -34,11 +34,11 @@ It's a space where you can ask questions, share your knowledge, and connect with
 |------------|-------------|
 | ![Home0](screenshots/home_0.PNG) | Home Page / Welcome Page |
 | ![Home1](screenshots/home_1.PNG) | Authenticated User Home Page |
-| ![Login/Register](screenshots/user_auth_form.PNG) | Login Page. |
-| ![Create Post](screenshots/create_discussion.PNG) | Create Discussion Page. |
+| ![Login/Register](screenshots/user_auth_form.PNG) | Login Page |
+| ![Create Post](screenshots/create_discussion.PNG) | Create Discussion Page |
 | ![Post View](screenshots/discussion_detail.PNG) | A Discussion with replies threaded below it. |
-| ![Profile](screenshots/profile.PNG) | User Profile page. |
-| ![Notifications](screenshots/notifications.PNG) | Notifications page. |
+| ![Profile](screenshots/profile.PNG) | User Profile Page |
+| ![Notifications](screenshots/notifications.PNG) | Notifications Page |
 
 ---
 
